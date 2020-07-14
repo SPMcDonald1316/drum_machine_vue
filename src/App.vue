@@ -17,7 +17,13 @@
           </b-card>
           <b-card class="my-4">
             <b-row class="justify-content-center">
-              <div class="sound-button border" v-for="clip in clips" :key="clip.name">X</div>
+              <div 
+              class="sound-button border border-warning m-1"
+              v-for="clip in clips" 
+              :key="clip.name"
+              >
+                {{clip.name}}
+              </div>
             </b-row>
           </b-card>
         </b-col>
@@ -45,5 +51,9 @@ export default {
   .sound-button {
     width: 160px;
     height: 160px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
