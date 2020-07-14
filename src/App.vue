@@ -7,7 +7,7 @@
             <b-row class="justify-content-between mx-2">
               <b-form-checkbox switch size="lg">Power</b-form-checkbox>
               <div class="border px-4 py-2">
-                Sound Name
+                {{lastPlayed}}
               </div>
             </b-row>
             <b-row class="mx-2 mt-4">
@@ -21,6 +21,7 @@
               class="sound-button border border-warning m-1"
               v-for="clip in clips" 
               :key="clip.name"
+              @click="playClip(clip)"
               >
                 {{clip.name}}
               </div>
@@ -41,7 +42,15 @@ export default {
   },
   data() {
     return {
-      clips
+      clips,
+      lastPlayed: 'No Sound'
+    }
+  },
+  methods: {
+    playClip({name, url}) {
+      let s = new Audio(url);
+      s.play();
+      this.lastPlayed = name;
     }
   }
 }
@@ -55,5 +64,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+      cursor: pointer;
+    }
   }
 </style>
