@@ -5,20 +5,22 @@
         <b-col cols="6" offset="3">
           <b-card class="mt-4">
             <b-row class="justify-content-between mx-2">
-              <b-form-checkbox switch size="lg">Power</b-form-checkbox>
+              <b-form-checkbox v-model="isOn" switch size="lg">
+                Power
+              </b-form-checkbox>
               <div class="border px-4 py-2">
                 {{lastPlayed}}
               </div>
             </b-row>
             <b-row class="mx-2 mt-4">
               <label for="volume">Volume</label>
-              <b-form-input id="volume" v-model="value" type="range" min="0" max="5"></b-form-input>
+              <b-form-input id="volume" type="range" min="0" max="5"></b-form-input>
             </b-row>
           </b-card>
           <b-card class="my-4">
             <b-row class="justify-content-center">
               <div 
-              class="sound-button border border-warning m-1"
+              :class="['sound-button border m-1', isOn ? 'border-warning' : 'button-disabled']"
               v-for="clip in clips" 
               :key="clip.name"
               @click="playClip(clip)"
@@ -43,14 +45,17 @@ export default {
   data() {
     return {
       clips,
+      isOn: true,
       lastPlayed: 'No Sound'
     }
   },
   methods: {
     playClip({name, url}) {
-      let s = new Audio(url);
-      s.play();
-      this.lastPlayed = name;
+      if (this.isOn) {
+        let s = new Audio(url);
+        s.play();
+        this.lastPlayed = name;
+      }
     }
   }
 }
@@ -67,5 +72,8 @@ export default {
     &:hover {
       cursor: pointer;
     }
+  }
+  .button-disabled {
+    border-color: gray !important;
   }
 </style>
