@@ -17,6 +17,9 @@
               <label for="volume">Volume</label>
               <b-form-input id="volume" v-model="volume" type="range" min="0" max="5"></b-form-input>
             </b-row>
+            <b-row class="mx-2 mt-4">
+              <b-form-checkbox v-model="loop" switch size="lg">Loop</b-form-checkbox>
+            </b-row>
           </b-card>
           <b-card class="my-4">
             <b-row class="justify-content-center">
@@ -48,6 +51,7 @@ export default {
       clips,
       volume: 2,
       isOn: true,
+      loop: false,
       lastPlayed: 'No Sound',
       currentAudio: {}
     }
@@ -55,15 +59,21 @@ export default {
   methods: {
     playClip({name, url}) {
       if (this.isOn) {
+        this.stop()
         const a = new Audio(url);
         a.volume = this.volume / 5;
+        a.loop = this.loop;
         a.play();
         this.currentAudio = a;
         this.lastPlayed = name;
       }
     },
     stop() {
-      this.currentAudio.pause()
+      try {
+        this.currentAudio.pause();
+      } catch(err) {
+        console.log(err);
+      }
     }
   }
 }
