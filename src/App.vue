@@ -1,28 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-container>
+      <b-row>
+        <b-col cols="6" offset="3">
+          <b-card class="mt-4">
+            <b-row class="justify-content-between mx-2">
+              <b-form-checkbox switch size="lg">Power</b-form-checkbox>
+              <div class="border px-4 py-2">
+                Sound Name
+              </div>
+            </b-row>
+            <b-row class="mx-2 mt-4">
+              <label for="volume">Volume</label>
+              <b-form-input id="volume" v-model="value" type="range" min="0" max="5"></b-form-input>
+            </b-row>
+          </b-card>
+          <b-card class="mt-2">
+            <b-row class="justify-content-center">
+              <div class="sound-button">X</div>
+            </b-row>
+          </b-card>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import clips from './clips'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data() {
+    return clips
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  .sound-button {
+    width: 200px;
+    height: 200px;
+  }
 </style>
