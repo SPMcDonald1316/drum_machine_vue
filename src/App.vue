@@ -15,9 +15,9 @@
               <b-form-input id="volume" v-model="value" type="range" min="0" max="5"></b-form-input>
             </b-row>
           </b-card>
-          <b-card class="mt-2">
+          <b-card class="my-4">
             <b-row class="justify-content-center">
-              <div class="sound-button">X</div>
+              <div class="sound-button border" v-for="clip in clips" :key="clip.name">X</div>
             </b-row>
           </b-card>
         </b-col>
@@ -34,14 +34,16 @@ export default {
   components: {
   },
   data() {
-    return clips
+    return {
+      clips
+    }
   }
 }
 </script>
 
 <style lang="scss">
   .sound-button {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
   }
 </style>
